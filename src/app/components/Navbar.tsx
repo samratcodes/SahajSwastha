@@ -2,23 +2,23 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { FiSearch } from 'react-icons/fi';
 import Image from 'next/image';
 
 const navbarConfig = {
   brand: {
     name: 'Sahaj Swastha',
-    logo: '/logo.png', // replace with actual logo path
+    logo: '/logomain.png',
     href: '/',
   },
   links: [
-    { label: 'Home', href: '/' },
     { label: 'About Us', href: '/aboutus' },
     { label: 'Services', href: '/services' },
-    { label: 'FAQ', href: '/faq' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'Facilities', href: '/facilities' },
+    { label: 'Membership', href: '/membership' },
   ],
   cta: {
-    label: 'Free Consultation',
+    label: 'Book Now',
     href: '/contact',
   },
 };
@@ -28,49 +28,64 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Navbar */}
-      <nav className="fixed top-0 w-full z-50 h-16 flex items-center px-6 md:px-12">
-        <div className="flex justify-between items-center w-full">
-          {/* Logo */}
-          <Link href={navbarConfig.brand.href} className="flex items-center gap-2">
-            {navbarConfig.brand.logo && (
-              <Image src={navbarConfig.brand.logo} alt="Logo" width={32} height={32} />
-            )}
-            <span className="text-xl font-bold text-blue-600">
-              {navbarConfig.brand.name}
-            </span>
+      {/* Top Navbar */}
+    <header className="absolute top-0 left-0 w-full flex items-center justify-between px-6 py-1 z-50 bg-gradient-to-t from-white/0 to-white/50">
+        {/* Left side: Links + Logo */}
+        <div className="flex items-center gap-6">
+                    {/* Logo */}
+          <Link href={navbarConfig.brand.href} className="flex items-center h-[100px] w-[100px] overflow-hidden">
+            <Image
+              src={navbarConfig.brand.logo}
+              alt={navbarConfig.brand.name}
+              width={1000}
+              height={1000}
+              className="object-contain h-[250px] w-[150px]"
+            />
           </Link>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Nav Links */}
+          <div className="hidden md:flex gap-6">
             {navbarConfig.links.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="font-medium text-gray-800 hover:text-blue-600 transition"
+                className="text-gray-700 font-medium hover:text-blue-600 transition"
               >
                 {link.label}
               </Link>
             ))}
-
-            {/* CTA Button */}
-            <Link href={navbarConfig.cta.href}>
-              <button className="px-5 py-2 bg-blue-600 text-white rounded-full font-semibold hover:bg-green-600 transition">
-                {navbarConfig.cta.label}
-              </button>
-            </Link>
           </div>
+
+        </div>
+
+        {/* Right side: Search + CTA + Menu */}
+        <div className="flex items-center gap-6">
+          {/* Search Box */}
+          <div className="hidden md:flex items-center gap-2 px-3 py-2 bg-white rounded-full shadow">
+            <FiSearch size={18} className="text-gray-800" />
+            <input
+              type="text"
+              placeholder="Search here..."
+              className="outline-none text-sm text-gray-700"
+            />
+          </div>
+
+          {/* CTA */}
+          <Link href={navbarConfig.cta.href}>
+            <button className="bg-black text-white px-4 py-2 rounded-full shadow hover:bg-gray-800 transition">
+              {navbarConfig.cta.label}
+            </button>
+          </Link>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-2xl text-blue-600"
+            className="md:hidden bg-white rounded-full p-2 shadow text-xl"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
-      </nav>
+      </header>
 
       {/* Mobile Sidebar */}
       <div
@@ -79,6 +94,7 @@ const Navbar = () => {
         `}
       >
         <div className="flex flex-col h-full p-6 space-y-6">
+          {/* Brand */}
           <span className="text-2xl font-bold text-blue-600 border-b pb-3">
             {navbarConfig.brand.name}
           </span>
@@ -100,7 +116,7 @@ const Navbar = () => {
           {/* CTA */}
           <div className="mt-auto">
             <Link href={navbarConfig.cta.href} onClick={() => setIsMenuOpen(false)}>
-              <button className="w-full px-5 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-green-600 transition">
+              <button className="w-full px-5 py-3 bg-black text-white rounded-full font-semibold hover:bg-gray-800 transition">
                 {navbarConfig.cta.label}
               </button>
             </Link>
