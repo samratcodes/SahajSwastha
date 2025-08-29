@@ -18,8 +18,8 @@ const navbarConfig = {
     { label: 'Membership', href: '/membership' },
   ],
   cta: {
-    label: 'Book Now',
-    href: '/contact',
+    label: 'Login / Register',
+    href: '/Login',
   },
 };
 
@@ -43,12 +43,12 @@ const Navbar = () => {
             />
           </Link>
           {/* Nav Links */}
-          <div className="hidden md:flex gap-6">
+          <div className="hidden md:flex gap-6 bottom-10">
             {navbarConfig.links.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-gray-700 font-medium hover:text-blue-600 transition"
+                className="text-gray-100 font-medium hover:text-blue-600 transition"
               >
                 {link.label}
               </Link>
